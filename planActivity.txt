@@ -1,0 +1,20 @@
+@startuml
+
+(*) --> "Create Game with some GameMode"
+"Create Game with some GameMode" --> "GameMode Initializes GameBoard"
+"GameMode Initializes GameBoard" --> "Game Loop"
+"Game Loop" --> "get next move"
+if "if next move exists and GameMode allows move" then
+  -->[true] "update game board accordingly"
+endif
+--> "GameRules updates board state"
+if "if gameRules.gameOver" then
+  -->[true] "GameRules sets win/lose status of players"
+  --> "End game"
+  --> (*)
+else
+  -->[false] "update display"
+  --> "Game Loop"
+endif
+
+@enduml

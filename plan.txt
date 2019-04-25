@@ -1,0 +1,66 @@
+@startuml
+
+class GameBoard {
+    + width
+    + height
+    + squares
+}
+
+GameBoard *-- Square
+
+class Square {
+    + isBomb()
+    + getNumber()
+    + isUncovered()
+    + whoUncovered()
+    + turnUncovered()
+    + timeUncovered()
+    + isFlagged()
+    + whoFlagged()
+    + turnFlagged()
+    + timeFlagged()
+}
+
+Square o-- Player
+
+
+class GameRules {
+    // handles end conditions
+    // can modify board and player state
+}
+
+
+class GameMode {
+    - gameRules
+    // handles other game mode constraints
+    //   player count
+    //   initial conditions
+    //   information visibility
+    //     -- perhaps flags should only be visible to the player who placed them
+    //   do players take turns
+    //     -- if so, whos turn it is
+}
+
+GameMode o-- Player
+
+GameMode *-- GameRules
+
+class Player {
+    + name
+    + canPlay
+    + points
+    + isWinner
+}
+
+class Game {
+    gameMode
+    gameBoard
+    players
+}
+
+Game *-- Player
+Game *-- GameMode
+Game *-- GameBoard
+
+
+@enduml
